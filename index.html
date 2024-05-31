@@ -35,4 +35,24 @@
             event.preventDefault(); // Prevent the default form behavior
             var formData = new FormData(this); // Get the form data
 
-            // Perform an asynchronous POST
+            // Perform an asynchronous POST request to the server
+            fetch('/result', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the result if data is received
+                if ('shift' in data && 'type' in data) {
+                    document.getElementById('result').innerText = `Shift: ${data.shift}, Type: ${data.type}`;
+                } 
+                // Display error message if an error occurred
+                else if ('error' in data) {
+                    document.getElementById('result').innerText = data.error;
+                }
+            })
+            .catch(error => console.error('Error:', error)); // Log any errors to the console
+        });
+    </script>
+</body>
+</html>
