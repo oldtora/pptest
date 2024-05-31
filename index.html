@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Lookup</title>
+</head>
+<body>
+    <h1>Data Lookup by Name and Date</h1>
+    <form action="/result" method="post">
+        <label for="name">Name:</label>
+        <select name="name" id="name">
+            {% for name in names %}
+                <option value="{{ name }}">{{ name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="date">Date:</label>
+        <select name="date" id="date">
+            {% for date in dates %}
+                <option value="{{ date }}">{{ date }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Lookup</button>
+    </form>
+    {% if result %}
+    <div id="result">
+        <h2>Result</h2>
+        <p>{{ result }}</p>
+    </div>
+    {% endif %}
+</body>
+</html>
