@@ -6,7 +6,8 @@
 </head>
 <body>
     <h1>Data Lookup by Name and Date</h1>
-    <form action="/result" method="post">
+    <form id="lookupForm">
+        <!-- Dropdown menu for selecting name -->
         <label for="name">Name:</label>
         <select name="name" id="name">
             {% for name in names %}
@@ -14,6 +15,7 @@
             {% endfor %}
         </select>
         <br>
+        <!-- Dropdown menu for selecting date -->
         <label for="date">Date:</label>
         <select name="date" id="date">
             {% for date in dates %}
@@ -21,13 +23,16 @@
             {% endfor %}
         </select>
         <br>
+        <!-- Button to trigger the data lookup -->
         <button type="submit">Lookup</button>
     </form>
-    {% if result %}
-    <div id="result">
-        <h2>Result</h2>
-        <p>{{ result }}</p>
-    </div>
-    {% endif %}
-</body>
-</html>
+    <!-- Container to display the result -->
+    <div id="result"></div>
+
+    <script>
+        // Handling form submission with asynchronous request
+        document.getElementById('lookupForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form behavior
+            var formData = new FormData(this); // Get the form data
+
+            // Perform an asynchronous POST
